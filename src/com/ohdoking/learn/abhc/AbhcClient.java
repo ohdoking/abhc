@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 //value 이름 일때만 생략해서 적을 수 있다. 그리고 2개이상이 되면 생략 불가
-@Server(value = "abhc.com",description = "annotation based ... ",headers={"Authorization : ohdoking","Agent : Chorome"})
+@Server(value = "abhc.com", description = "annotation based ... ",headers={"Authorization : ohdoking","Agent : Chorome"})
 public interface AbhcClient {
 
 	/*

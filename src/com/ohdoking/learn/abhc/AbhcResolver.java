@@ -1,6 +1,11 @@
 package com.ohdoking.learn.abhc;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 public class AbhcResolver {
 
@@ -10,13 +15,17 @@ public class AbhcResolver {
 		String host = server.value();
 		String description = server.description();
 		String[] headers = server.headers();
+		Map<String,String> hash = token(headers);
 		
 		System.out.println("server url : " + server.value());
 		System.out.println("server description : " + server.description());
 		
-		for (String string : headers) {
-			System.out.println(string);
+		for (Map.Entry<String, String> elem : hash.entrySet()) {
+			System.out.println(elem.getKey() + " >< " + elem.getValue());
 		}
+		/*for (String string : headers) {
+			System.out.println(string);
+		}*/
 		Method[] methods = client.getDeclaredMethods();
 		for (Method method : methods) {
 			
@@ -28,6 +37,19 @@ public class AbhcResolver {
 				System.out.println("method annoation value : "+ get.value());
 			}
 		}
+	}
+	
+	public static Map<String,String> token(String[] something){
+		Map<String,String> hash = new HashMap<String, String>();  
+		for (String string : something) {
+			String[] tokenValue = string.split(":");
+			
+			String key = tokenValue[0];
+			String value = tokenValue[1];
+		
+			hash.put(key, value);
+		}
+		return hash;
 	}
 	
 	/*
